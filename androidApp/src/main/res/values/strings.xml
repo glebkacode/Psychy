@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="signInTab">Вход</string>
+    <string name="signUpTab">Регистрация</string>
+    <string name="signInAction">Ввойти</string>
+    <string name="signInForgotPassword">Забыли пароль?</string>
+</resources>
