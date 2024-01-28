@@ -3,9 +3,8 @@ package com.china.psychy
 import com.china.psychy.auth.data.AuthRepository
 import com.china.psychy.auth.domain.RegisterUserUseCase
 import com.china.psychy.auth.domain.RegisterUserUseCaseImpl
-import com.china.psychy.auth.models.User
+import com.china.psychy.auth.model.User
 import dev.mokkery.MockMode
-import dev.mokkery.everySuspend
 import dev.mokkery.mock
 import dev.mokkery.verify.VerifyMode
 import dev.mokkery.verifySuspend

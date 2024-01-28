@@ -41,6 +41,10 @@ android {
 
 dependencies {
     implementation(projects.shared)
+    implementation(project(":androidApp:feature-auth"))
+    implementation(project(":androidApp:feature-lk"))
+    implementation(project(":androidApp:feature-profile"))
+    implementation(project(":androidApp:feature-sessions"))
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)

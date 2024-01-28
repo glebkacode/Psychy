@@ -4,4 +4,5 @@
     <string name="signUpTab">Регистрация</string>
     <string name="signInAction">Ввойти</string>
     <string name="signInForgotPassword">Забыли пароль?</string>
+    <string name="sessionsHeader">Список сессий</string>
 </resources>

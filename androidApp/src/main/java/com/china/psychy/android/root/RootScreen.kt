@@ -8,7 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import com.china.psychy.android.lk.LkScreen
+import com.china.psychy.android.feature.lk.LkScreen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +30,5 @@ fun RootScreen() {
 
             }
         }
-    ) { _ ->
-        LkScreen()
-    }
+    ) { _ -> LkScreen() }
 }
