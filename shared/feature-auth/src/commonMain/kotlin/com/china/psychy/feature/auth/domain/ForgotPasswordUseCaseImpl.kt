@@ -1,6 +1,6 @@
 package com.china.psychy.feature.auth.domain
 
-import com.china.psychy.auth.data.AuthRepository
+import com.china.psychy.feature.auth.data.AuthRepository
 import me.tatarka.inject.annotations.Inject
 
 @Inject

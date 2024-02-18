@@ -1,4 +1,4 @@
-package com.china.psychy.android.session.list
+package com.china.psychy.feature.sessions.list
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -19,7 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.china.psychy.android.R
+import com.china.psychy.android.feature.sessions.R
 
 typealias SessionsScreen = @Composable () -> Unit
 

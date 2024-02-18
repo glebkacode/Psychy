@@ -17,8 +17,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val login = InjectApplicationComponent().login
-                    login()
+                    val component = InjectApplicationComponent()
+                    val login = component.login
+                    val signInController = component.signInController
+                    val signUpController = component.signUpController
+                    login(signInController, signUpController)
                 }
             }
         }

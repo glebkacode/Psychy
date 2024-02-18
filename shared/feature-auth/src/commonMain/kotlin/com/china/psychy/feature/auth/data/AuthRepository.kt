@@ -1,6 +1,6 @@
 package com.china.psychy.feature.auth.data
 
-import com.china.psychy.auth.model.User
+import com.china.psychy.feature.auth.model.User
 
 interface AuthRepository {
     suspend fun registerUser(user: User)

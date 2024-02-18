@@ -1,4 +1,4 @@
-package com.china.psychy.android.session.list
+package com.china.psychy.feature.sessions.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

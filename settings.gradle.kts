@@ -16,6 +16,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "Psychy"
 include(":androidApp")
+include(":androidApp:core")
 include(":androidApp:feature-auth")
 include(":androidApp:feature-lk")
 include(":androidApp:feature-profile")

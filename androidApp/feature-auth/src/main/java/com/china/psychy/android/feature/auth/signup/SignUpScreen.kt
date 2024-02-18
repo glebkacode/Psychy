@@ -7,21 +7,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.china.psychy.android.feature.auth.shared.Email
 import com.china.psychy.android.feature.auth.shared.Password
-import com.china.psychy.android.feature.auth.signup.SignUpViewModel.Event
-import com.china.psychy.android.feature.auth.signup.SignUpViewModel.Event.EmailChanged
-import com.china.psychy.android.feature.auth.signup.SignUpViewModel.Event.PasswordChanged
-import com.china.psychy.android.feature.auth.signup.SignUpViewModel.SignUpUiState
 
 @Composable
 fun SignUpScreen(
-    model: SignUpUiState,
-    onEventChanged: (Event) -> Unit
+    controller: SignUpController
 ) {
+    val model by controller.model.collectAsState(Model())
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -29,9 +27,19 @@ fun SignUpScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Email(text = model.email) { text -> onEventChanged(EmailChanged(text)) }
+        Email(
+            text = model.email,
+            isValid = true
+        ) { text ->
+            controller.onEmailChanged(text)
+        }
         Spacer(modifier = Modifier.height(16.dp))
-        Password(text = model.password) { text -> onEventChanged(PasswordChanged(text)) }
+        Password(
+            text = model.password,
+            isValid = true
+        ) { text ->
+            controller.onPasswordChanged(text)
+        }
         Spacer(modifier = Modifier.height(16.dp))
     }
 }

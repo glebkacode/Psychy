@@ -1,4 +1,4 @@
-package com.china.psychy.android.session.detail
+package com.china.psychy.feature.sessions.detail
 
 import androidx.compose.runtime.Composable
 

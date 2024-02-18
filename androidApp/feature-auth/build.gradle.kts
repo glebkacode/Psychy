@@ -8,11 +8,31 @@ plugins {
 android {
     namespace = "com.china.psychy.android.feature.auth"
     compileSdk = 34
+    resourcePrefix("auth")
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
+    }
 }
 
 dependencies {
     implementation(projects.shared)
+    implementation(project(":androidApp:core"))
     implementation(project(":shared:feature-auth"))
+    implementation(libs.mvikotlin)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
+    implementation(libs.mvikotlin.extensions.coroutines)
+    implementation(libs.mvikotlin.timetravel)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)

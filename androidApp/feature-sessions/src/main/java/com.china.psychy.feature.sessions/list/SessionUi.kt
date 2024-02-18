@@ -1,4 +1,4 @@
-package com.china.psychy.android.session.list
+package com.china.psychy.feature.sessions.list
 
 data class SessionUi(
     val id: Long,

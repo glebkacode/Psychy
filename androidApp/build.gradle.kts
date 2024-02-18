@@ -31,20 +31,30 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 }
 
 dependencies {
     implementation(projects.shared)
+    implementation(project(":androidApp:core"))
     implementation(project(":androidApp:feature-auth"))
     implementation(project(":androidApp:feature-lk"))
     implementation(project(":androidApp:feature-profile"))
     implementation(project(":androidApp:feature-sessions"))
+    implementation(project(":shared:feature-auth"))
+    implementation(project(":shared:feature-lk"))
+    implementation(project(":shared:feature-profile"))
+    implementation(project(":shared:feature-sessions"))
+    implementation(libs.mvikotlin)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
+    implementation(libs.mvikotlin.extensions.coroutines)
+    implementation(libs.mvikotlin.timetravel)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)

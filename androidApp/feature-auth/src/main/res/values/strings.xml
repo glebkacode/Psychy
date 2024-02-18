@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_signin_action">Ввойти</string>
+    <string name="auth_signin_forgot_password">Забыли пароль?</string>
+    <string name="auth_signin_tab">Вход</string>
+    <string name="auth_signup_tab">Регистрация</string>
+</resources>
