@@ -8,6 +8,7 @@ import com.arkivanov.mvikotlin.core.utils.JvmSerializable
 import com.china.psychy.android.feature.auth.signin.SignInStore.State
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.china.psychy.android.feature.auth.signin.SignInStore.Intent
+import com.china.psychy.android.feature.auth.signin.SignInStore.Label
 import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
 import com.china.psychy.feature.auth.domain.LoginUserUseCase
 import com.china.psychy.feature.auth.model.User
@@ -29,18 +30,17 @@ class SignInStoreFactory(
         data class EmailInvalid(val text: String) : Msg
         data class PasswordChanged(val text: String) : Msg
         data class PasswordInvalid(val text: String) : Msg
-        data object SendNewPassword : Msg
     }
 
     fun create(): SignInStore =
-        object : SignInStore, Store<Intent, State, Nothing> by storeFactory.create(
+        object : SignInStore, Store<Intent, State, Label> by storeFactory.create(
             name = "SignInStore",
             initialState = State(),
             executorFactory = ::ExecutorImpl,
             reducer = ReducerImpl
         ) {}
 
-    inner class ExecutorImpl : CoroutineExecutor<Intent, Nothing, State, Msg, Nothing>(mainContext) {
+    inner class ExecutorImpl : CoroutineExecutor<Intent, Nothing, State, Msg, Label>(mainContext) {
         override fun executeIntent(intent: Intent, getState: () -> State) {
             super.executeIntent(intent, getState)
             when (intent) {
@@ -48,6 +48,7 @@ class SignInStoreFactory(
                 is Intent.PasswordChanged -> changePassword(intent.text)
                 is Intent.LoginClicked -> loginUser(getState())
                 is Intent.ForgotPasswordClicked -> forgotPassword(getState().email)
+                Intent.NoAccountClicked -> registerNewUser()
             }
         }
 
@@ -78,8 +79,12 @@ class SignInStoreFactory(
         private fun forgotPassword(email: String) {
             scope.launch(ioContext) {
                 forgotPasswordUseCase(email)
-                dispatch(Msg.SendNewPassword)
+                publish(Label.RecoveryPassword)
             }
+        }
+
+        private fun registerNewUser() {
+            publish(Label.RegisterNewUser)
         }
     }
 
@@ -90,7 +95,6 @@ class SignInStoreFactory(
                 is Msg.EmailInvalid -> copy(email = msg.text, isEmailValid = false)
                 is Msg.PasswordChanged -> copy(password = msg.text, isPasswordValid = true)
                 is Msg.PasswordInvalid -> copy(password = msg.text, isPasswordValid = false)
-                Msg.SendNewPassword -> TODO()
             }
     }
 }

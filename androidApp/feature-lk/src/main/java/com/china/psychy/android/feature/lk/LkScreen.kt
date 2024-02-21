@@ -5,6 +5,6 @@ import me.tatarka.inject.annotations.Inject
 
 @Inject
 @Composable
-fun LkScreen() {
+fun LkScreen(component: LkComponent) {
 
 }

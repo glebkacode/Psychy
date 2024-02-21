@@ -11,15 +11,18 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.china.psychy.android.feature.auth.R
+import com.china.psychy.android.feature.auth.shared.ApplyButton
 import com.china.psychy.android.feature.auth.shared.Email
 import com.china.psychy.android.feature.auth.shared.Password
 
 @Composable
 fun SignUpScreen(
-    controller: SignUpController
+    component: SignUpComponent
 ) {
-    val model by controller.model.collectAsState(Model())
+    val state by component.models.collectAsState(Model())
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -28,18 +31,21 @@ fun SignUpScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Email(
-            text = model.email,
+            text = state.email,
             isValid = true
         ) { text ->
-            controller.onEmailChanged(text)
+            component.onEmailChanged(text)
         }
         Spacer(modifier = Modifier.height(16.dp))
         Password(
-            text = model.password,
+            text = state.password,
             isValid = true
         ) { text ->
-            controller.onPasswordChanged(text)
+            component.onPasswordChanged(text)
         }
         Spacer(modifier = Modifier.height(16.dp))
+        ApplyButton(text = stringResource(id = R.string.auth_sign_up_action)) {
+            component.onApplyButtonClicked()
+        }
     }
 }

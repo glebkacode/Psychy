@@ -1,6 +1,5 @@
 package com.china.psychy.android.feature.auth.signup
 
-import com.arkivanov.mvikotlin.core.store.Executor
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -8,10 +7,14 @@ import com.arkivanov.mvikotlin.core.utils.JvmSerializable
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.china.psychy.android.feature.auth.signup.SignUpStore.Intent
 import com.china.psychy.android.feature.auth.signup.SignUpStore.State
+import com.china.psychy.feature.auth.domain.RegisterUserUseCase
+import com.china.psychy.feature.auth.model.User
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
 class SignUpStoreFactory(
     private val storeFactory: StoreFactory,
+    private val registerUserUseCase: RegisterUserUseCase,
     private val mainContext: CoroutineContext,
     private val ioContext: CoroutineContext
 ) {
@@ -28,7 +31,7 @@ class SignUpStoreFactory(
             reducer = ReducerImpl
         ) {}
 
-    class ExecutorImpl : CoroutineExecutor<Intent, Nothing, State, Msg, Nothing>() {
+    inner class ExecutorImpl : CoroutineExecutor<Intent, Nothing, State, Msg, Nothing>() {
 
         override fun executeIntent(intent: Intent, getState: () -> State) {
             super.executeIntent(intent, getState)
@@ -52,6 +55,9 @@ class SignUpStoreFactory(
         }
 
         private fun registerUser(email: String, password: String) {
+            scope.launch(ioContext) {
+                registerUserUseCase(User(email, password))
+            }
             // ToDo запрос на бекенд для регистрации нового пользователя, помни про ошибки
         }
     }

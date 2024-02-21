@@ -21,9 +21,10 @@ import com.china.psychy.android.feature.auth.shared.Password
 
 @Composable
 fun SignInScreen(
-    controller: SignInController,
+    component: SignInComponent
 ) {
-    val model by controller.model.collectAsState(Model())
+    val state by component.models.collectAsState(initial = Model())
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -32,21 +33,29 @@ fun SignInScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Email(
-            text = model.email.text,
-            isValid = model.email.isValid
+            text = state.email.text,
+            isValid = true
         ) { text ->
-            controller.onEmailChanged(text)
+            component.onEmailChanged(text)
         }
         Spacer(modifier = Modifier.height(16.dp))
         Password(
-            text = model.password.text,
-            isValid = model.password.isValid
+            text = state.password.text,
+            isValid = true
         ) { text ->
-            controller.onPasswordChanged(text)
+            component.onPasswordChanged(text)
         }
         Spacer(modifier = Modifier.height(16.dp))
-        ApplyButton(text = stringResource(id = R.string.auth_signin_action)) { controller.onApplyButtonClicked() }
+        ApplyButton(text = stringResource(id = R.string.auth_sign_in_action)) {
+            component.onApplyButtonClicked()
+        }
         Spacer(modifier = Modifier.height(16.dp))
-        ForgotPassword(text = stringResource(id = R.string.auth_signin_forgot_password)) { controller.onForgotPasswordClicked() }
+        ApplyButton(text = stringResource(id = R.string.auth_no_account_available)) {
+            component.onNoAccountClicked()
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        ForgotPassword(text = stringResource(id = R.string.auth_sign_in_forgot_password)) {
+            component.onForgotPasswordClicked()
+        }
     }
 }

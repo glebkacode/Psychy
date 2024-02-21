@@ -13,3 +13,11 @@ internal val statesToModel: (SignInStore.State) -> Model =
             )
         )
     }
+
+internal val addLabelToOutput: (SignInStore.Label) -> SignInComponent.Output =
+    { label ->
+        when(label) {
+            SignInStore.Label.RecoveryPassword -> SignInComponent.Output.OpenForgotPassword
+            SignInStore.Label.RegisterNewUser -> SignInComponent.Output.OpenSignUp
+        }
+    }

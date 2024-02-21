@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -50,6 +51,8 @@ dependencies {
     implementation(project(":shared:feature-lk"))
     implementation(project(":shared:feature-profile"))
     implementation(project(":shared:feature-sessions"))
+    implementation(libs.decompose)
+    implementation(libs.decompose.jetpack)
     implementation(libs.mvikotlin)
     implementation(libs.mvikotlin.main)
     implementation(libs.mvikotlin.logging)

@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinSerialization)
 }
 
 android {
@@ -33,6 +34,8 @@ dependencies {
     implementation(libs.mvikotlin.logging)
     implementation(libs.mvikotlin.extensions.coroutines)
     implementation(libs.mvikotlin.timetravel)
+    implementation(libs.decompose)
+    implementation(libs.decompose.jetpack)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)

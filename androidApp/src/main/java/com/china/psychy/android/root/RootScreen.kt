@@ -1,34 +1,20 @@
 package com.china.psychy.android.root
 
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.ui.Modifier
+import com.arkivanov.decompose.extensions.compose.jetpack.stack.Children
+import com.china.psychy.android.feature.auth.login.LoginScreen
 import com.china.psychy.android.feature.lk.LkScreen
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RootScreen() {
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.primary,
-                ),
-                title = {
-                    Text("Small Top App Bar")
-                }
-            )
-        },
-        bottomBar = {
-            NavigationBar {
-
-            }
+fun RootScreen(component: RootComponent, modifier: Modifier) {
+    Children(
+        stack = component.childStack,
+        modifier = modifier
+    ) {
+        when (val child = it.instance) {
+            is RootComponent.Child.AuthChild -> LoginScreen(child.component, modifier)
+            is RootComponent.Child.LkChild -> LkScreen(child.component)
         }
-    ) { _ -> LkScreen() }
+    }
 }

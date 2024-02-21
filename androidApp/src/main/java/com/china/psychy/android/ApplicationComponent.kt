@@ -4,8 +4,6 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.core.dispatchers.CoreDispatcherImpl
-import com.china.psychy.android.feature.auth.LoginScreen
-import com.china.psychy.android.feature.auth.signin.SignInController
 import com.china.psychy.android.feature.auth.signup.SignUpController
 import com.china.psychy.feature.auth.data.AuthRepository
 import com.china.psychy.feature.auth.data.AuthRepositoryImpl
@@ -20,9 +18,9 @@ import me.tatarka.inject.annotations.Provides
 
 @Component
 abstract class ApplicationComponent {
-    abstract val login: LoginScreen
-    abstract val signInController: SignInController
-    abstract val signUpController: SignUpController
+    /*abstract val login: LoginScreen*/
+/*    abstract val signInController: SignInController
+    abstract val signUpController: SignUpController*/
 
     @Provides
     fun provideCoreDispatchers(dispatchers: CoreDispatcherImpl): CoreDispatcher = dispatchers
@@ -49,21 +47,6 @@ abstract class ApplicationComponent {
                 } else {
                     DefaultStoreFactory()
                 }*/
-    }
-
-    @Provides
-    fun provideSignInController(
-        storeFactory: StoreFactory,
-        loginUserUseCase: LoginUserUseCase,
-        forgotPasswordUseCase: ForgotPasswordUseCase,
-        coreDispatcher: CoreDispatcher
-    ): SignInController {
-        return SignInController(
-            storeFactory,
-            loginUserUseCase,
-            forgotPasswordUseCase,
-            coreDispatcher
-        )
     }
 
     @Provides
