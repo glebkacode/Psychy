@@ -10,16 +10,18 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.auth.login.AuthComponent
 import com.china.psychy.android.feature.auth.login.AuthComponentImpl
-import com.china.psychy.android.feature.lk.LkComponentImpl
+import com.china.psychy.android.feature.tabs.root.TabsRootComponentImpl
 import com.china.psychy.android.root.RootComponent.Child
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
-import com.china.psychy.feature.auth.domain.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCase
 import kotlinx.serialization.Serializable
 
 class RootComponentImpl(
     componentContext: ComponentContext,
     private val storeFactory: StoreFactory,
     private val loginUserUseCase: LoginUserUseCase,
+    private val registerUserUseCase: RegisterUserUseCase,
     private val forgotPasswordUseCase: ForgotPasswordUseCase,
     private val coreDispatcher: CoreDispatcher,
 ) : RootComponent, ComponentContext by componentContext {
@@ -29,7 +31,7 @@ class RootComponentImpl(
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.Auth,
+        initialConfiguration = Config.RootTabs,
         childFactory = ::child
     )
     override val childStack: Value<ChildStack<*, Child>> = stack
@@ -41,17 +43,20 @@ class RootComponentImpl(
                     componentContext = componentContext,
                     storeFactory = storeFactory,
                     loginUserUseCase = loginUserUseCase,
+                    registerUserUseCase = registerUserUseCase,
                     forgotPasswordUseCase = forgotPasswordUseCase,
                     coreDispatcher = coreDispatcher,
                     output = ::onAuthOutput
                 )
             )
-            Config.Lk -> Child.LkChild(LkComponentImpl())
+            Config.RootTabs -> Child.TabsRootChild(
+                TabsRootComponentImpl(componentContext = componentContext)
+            )
         }
 
     private fun onAuthOutput(output: AuthComponent.Output) {
         when(output) {
-            AuthComponent.Output.OpenLk -> navigation.push(Config.Lk)
+            AuthComponent.Output.OpenLk -> navigation.push(Config.RootTabs)
         }
     }
 
@@ -60,6 +65,6 @@ class RootComponentImpl(
         @Serializable
         data object Auth : Config
         @Serializable
-        data object Lk : Config
+        data object RootTabs : Config
     }
 }

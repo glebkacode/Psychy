@@ -16,14 +16,16 @@ import com.china.psychy.android.feature.auth.signin.SignInComponent
 import com.china.psychy.android.feature.auth.signin.SignInComponentImpl
 import com.china.psychy.android.feature.auth.signup.SignUpComponent
 import com.china.psychy.android.feature.auth.signup.SignUpComponentImpl
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
-import com.china.psychy.feature.auth.domain.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCase
 import kotlinx.serialization.Serializable
 
 class AuthComponentImpl(
     componentContext: ComponentContext,
     private val storeFactory: StoreFactory,
     private val loginUserUseCase: LoginUserUseCase,
+    private val registerUserUseCase: RegisterUserUseCase,
     private val forgotPasswordUseCase: ForgotPasswordUseCase,
     private val coreDispatcher: CoreDispatcher,
     private val output: (AuthComponent.Output) -> Unit
@@ -55,6 +57,7 @@ class AuthComponentImpl(
                 SignUpComponentImpl(
                     componentContext,
                     storeFactory,
+                    registerUserUseCase,
                     coreDispatcher,
                     ::onSignUpOutput
                 )

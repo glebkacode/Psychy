@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -32,6 +33,7 @@ fun SignInScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
+
         Email(
             text = state.email.text,
             isValid = true
@@ -56,6 +58,9 @@ fun SignInScreen(
         Spacer(modifier = Modifier.height(16.dp))
         ForgotPassword(text = stringResource(id = R.string.auth_sign_in_forgot_password)) {
             component.onForgotPasswordClicked()
+        }
+        if (state.isError) {
+            Text(text = "No internet connection",)
         }
     }
 }

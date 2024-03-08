@@ -8,8 +8,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.auth.signin.SignInComponent.Output
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
-import com.china.psychy.feature.auth.domain.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCase
 import kotlinx.coroutines.flow.mapNotNull
 
 class SignInComponentImpl(

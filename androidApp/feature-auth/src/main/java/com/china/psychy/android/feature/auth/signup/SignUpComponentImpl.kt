@@ -4,7 +4,7 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
-import com.china.psychy.feature.auth.domain.RegisterUserUseCase
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCase
 import kotlinx.coroutines.flow.mapNotNull
 
 class SignUpComponentImpl(

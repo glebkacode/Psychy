@@ -7,7 +7,7 @@ import com.arkivanov.mvikotlin.core.utils.JvmSerializable
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.china.psychy.android.feature.auth.signup.SignUpStore.Intent
 import com.china.psychy.android.feature.auth.signup.SignUpStore.State
-import com.china.psychy.feature.auth.domain.RegisterUserUseCase
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCase
 import com.china.psychy.feature.auth.model.User
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext

@@ -17,12 +17,19 @@ interface SignInStore : Store<SignInStore.Intent, State, SignInStore.Label> {
     sealed class Label : JvmSerializable {
         data object RecoveryPassword : Label()
         data object RegisterNewUser : Label()
+        data object OpenLk : Label()
     }
 
     data class State(
         val email: String = "",
         val isEmailValid: Boolean = false,
         val password: String = "",
-        val isPasswordValid: Boolean = false
+        val isPasswordValid: Boolean = false,
+        val errorType: ErrorType = ErrorType.None
     ) : JvmSerializable
+
+    enum class ErrorType {
+        None,
+        Network
+    }
 }

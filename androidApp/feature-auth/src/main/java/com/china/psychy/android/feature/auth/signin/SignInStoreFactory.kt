@@ -7,12 +7,14 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.core.utils.JvmSerializable
 import com.china.psychy.android.feature.auth.signin.SignInStore.State
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
+import com.china.psychy.android.feature.auth.signin.SignInStore.ErrorType
 import com.china.psychy.android.feature.auth.signin.SignInStore.Intent
 import com.china.psychy.android.feature.auth.signin.SignInStore.Label
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
-import com.china.psychy.feature.auth.domain.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCase
 import com.china.psychy.feature.auth.model.User
 import kotlinx.coroutines.launch
+import java.net.UnknownHostException
 
 private const val PASSWORD_MIN_LENGTH = 4
 private const val PASSWORD_MAX_LENGTH = 30
@@ -30,6 +32,7 @@ class SignInStoreFactory(
         data class EmailInvalid(val text: String) : Msg
         data class PasswordChanged(val text: String) : Msg
         data class PasswordInvalid(val text: String) : Msg
+        data object InternetConnectionFailed : Msg
     }
 
     fun create(): SignInStore =
@@ -71,7 +74,15 @@ class SignInStoreFactory(
         private fun loginUser(state: State) {
             scope.launch(ioContext) {
                 if (state.isEmailValid && state.isPasswordValid) {
-                    loginUserUseCase(User(state.email, state.password))
+                    runCatching {
+                        loginUserUseCase(User(state.email, state.password))
+                    }.onSuccess {
+                        publish(Label.OpenLk)
+                    }.onFailure { throwable ->
+                        if (throwable is UnknownHostException) {
+                            dispatch(Msg.InternetConnectionFailed)
+                        }
+                    }
                 }
             }
         }
@@ -91,10 +102,31 @@ class SignInStoreFactory(
     object ReducerImpl : Reducer<State, Msg> {
         override fun State.reduce(msg: Msg): State =
             when (msg) {
-                is Msg.EmailChanged -> copy(email = msg.text, isEmailValid = true)
-                is Msg.EmailInvalid -> copy(email = msg.text, isEmailValid = false)
-                is Msg.PasswordChanged -> copy(password = msg.text, isPasswordValid = true)
-                is Msg.PasswordInvalid -> copy(password = msg.text, isPasswordValid = false)
+                is Msg.EmailChanged -> copy(
+                    email = msg.text,
+                    isEmailValid = true,
+                    errorType = ErrorType.None
+                )
+
+                is Msg.EmailInvalid -> copy(
+                    email = msg.text,
+                    isEmailValid = false,
+                    errorType = ErrorType.None
+                )
+
+                is Msg.PasswordChanged -> copy(
+                    password = msg.text,
+                    isPasswordValid = true,
+                    errorType = ErrorType.None
+                )
+
+                is Msg.PasswordInvalid -> copy(
+                    password = msg.text,
+                    isPasswordValid = false,
+                    errorType = ErrorType.None
+                )
+
+                is Msg.InternetConnectionFailed -> copy(errorType = ErrorType.Network)
             }
     }
 }

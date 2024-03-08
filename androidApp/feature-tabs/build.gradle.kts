@@ -1,35 +1,19 @@
+@Suppress("DSL_SCOPE_VIOLATION") // TODO: Remove once KTIJ-19369 is fixed
 plugins {
-    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlinSerialization)
 }
 
 android {
-    namespace = "com.china.psychy.android"
+    namespace = "com.china.psychy.android.feature.tabs"
     compileSdk = 34
-    defaultConfig {
-        applicationId = "com.china.psychy.android"
-        minSdk = 24
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
-    }
     buildFeatures {
         compose = true
     }
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
-    }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-    buildTypes {
-        getByName("release") {
-            isMinifyEnabled = false
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -42,18 +26,7 @@ android {
 
 dependencies {
     implementation(projects.shared)
-    implementation(project(":androidApp:core"))
-    implementation(project(":androidApp:feature-auth"))
-    implementation(project(":androidApp:feature-tabs"))
-    implementation(project(":shared:feature-auth"))
     implementation(project(":shared:feature-lk"))
-    implementation(libs.decompose)
-    implementation(libs.decompose.jetpack)
-    implementation(libs.mvikotlin)
-    implementation(libs.mvikotlin.main)
-    implementation(libs.mvikotlin.logging)
-    implementation(libs.mvikotlin.extensions.coroutines)
-    implementation(libs.mvikotlin.timetravel)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
@@ -63,5 +36,12 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     ksp(libs.kotlin.inject.ksp)
     implementation(libs.kotlin.inject.runtime)
+    implementation(libs.mvikotlin)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
+    implementation(libs.mvikotlin.extensions.coroutines)
+    implementation(libs.mvikotlin.timetravel)
+    implementation(libs.decompose)
+    implementation(libs.decompose.jetpack)
     debugImplementation(libs.compose.ui.tooling)
 }

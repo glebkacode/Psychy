@@ -6,8 +6,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
-import com.china.psychy.android.feature.auth.signin.SignInStoreFactory
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
 import kotlinx.coroutines.flow.mapNotNull
 
 class ForgotPasswordComponentImpl(

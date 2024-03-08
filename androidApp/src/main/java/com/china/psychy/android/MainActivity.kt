@@ -12,9 +12,10 @@ import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcherImpl
 import com.china.psychy.android.root.RootComponentImpl
 import com.china.psychy.android.root.RootScreen
-import com.china.psychy.feature.auth.data.AuthRepositoryImpl
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCaseImpl
-import com.china.psychy.feature.auth.domain.LoginUserUseCaseImpl
+import com.china.psychy.feature.auth.data.repository.AuthRepositoryImpl
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCaseImpl
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCaseImpl
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCaseImpl
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +25,7 @@ class MainActivity : ComponentActivity() {
             componentContext = defaultComponentContext(),
             storeFactory = DefaultStoreFactory(),
             loginUserUseCase = LoginUserUseCaseImpl(authRepository),
+            registerUserUseCase = RegisterUserUseCaseImpl(authRepository),
             forgotPasswordUseCase = ForgotPasswordUseCaseImpl(authRepository),
             coreDispatcher = CoreDispatcherImpl()
         )

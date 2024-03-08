@@ -8,9 +8,7 @@ import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import com.china.psychy.android.feature.auth.forgotpassword.ForgotPasswordStore.Intent
 import com.china.psychy.android.feature.auth.forgotpassword.ForgotPasswordStore.Label
 import com.china.psychy.android.feature.auth.forgotpassword.ForgotPasswordStore.State
-import com.china.psychy.android.feature.auth.signin.SignInStore
-import com.china.psychy.android.feature.auth.signin.SignInStoreFactory
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 

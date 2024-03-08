@@ -4,15 +4,14 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.main.store.DefaultStoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.core.dispatchers.CoreDispatcherImpl
-import com.china.psychy.android.feature.auth.signup.SignUpController
-import com.china.psychy.feature.auth.data.AuthRepository
-import com.china.psychy.feature.auth.data.AuthRepositoryImpl
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCase
-import com.china.psychy.feature.auth.domain.ForgotPasswordUseCaseImpl
-import com.china.psychy.feature.auth.domain.LoginUserUseCase
-import com.china.psychy.feature.auth.domain.LoginUserUseCaseImpl
-import com.china.psychy.feature.auth.domain.RegisterUserUseCase
-import com.china.psychy.feature.auth.domain.RegisterUserUseCaseImpl
+import com.china.psychy.feature.auth.data.repository.AuthRepository
+import com.china.psychy.feature.auth.data.repository.AuthRepositoryImpl
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
+import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCaseImpl
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCase
+import com.china.psychy.feature.auth.domain.loginuser.LoginUserUseCaseImpl
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCase
+import com.china.psychy.feature.auth.domain.registeruser.RegisterUserUseCaseImpl
 import me.tatarka.inject.annotations.Component
 import me.tatarka.inject.annotations.Provides
 
@@ -47,13 +46,5 @@ abstract class ApplicationComponent {
                 } else {
                     DefaultStoreFactory()
                 }*/
-    }
-
-    @Provides
-    fun provideSignUpController(
-        storeFactory: StoreFactory,
-        coreDispatcher: CoreDispatcher
-    ): SignUpController {
-        return SignUpController(storeFactory, coreDispatcher)
     }
 }
