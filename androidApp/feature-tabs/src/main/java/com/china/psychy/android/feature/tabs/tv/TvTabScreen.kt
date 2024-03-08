@@ -1,4 +1,4 @@
-package com.china.psychy.android.feature.tabs.fims
+package com.china.psychy.android.feature.tabs.tv
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,12 +9,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun FilmsScreen(component: FilmsComponent) {
+fun TvTabScreen(
+    component: TvTabComponent,
+    modifier: Modifier
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Films")
+        Text(text = "Tv")
     }
 }

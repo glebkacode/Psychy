@@ -9,7 +9,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun ProfileScreen(component: ProfileComponent) {
+fun ProfileTabScreen(
+    component: ProfileTabComponent,
+    modifier: Modifier
+) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

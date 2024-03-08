@@ -2,7 +2,7 @@ package com.china.psychy.android.feature.tabs.fims
 
 import com.arkivanov.decompose.ComponentContext
 
-class FilmsComponentImpl(
+class FilmsTabComponentImpl(
     componentContext: ComponentContext
-) : FilmsComponent, ComponentContext by componentContext {
+) : FilmsTabComponent, ComponentContext by componentContext {
 }

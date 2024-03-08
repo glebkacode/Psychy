@@ -1,4 +1,4 @@
-package com.china.psychy.android.feature.tabs.main
+package com.china.psychy.android.feature.tabs.serials
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,12 +9,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
 @Composable
-fun MainScreen(component: MainComponent){
+fun SerialsTabScreen(
+    component: SerialsTabComponent,
+    modifier: Modifier
+) {
     Column(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
     ) {
-        Text(text = "Main")
+        Text(text = "Serials")
     }
 }

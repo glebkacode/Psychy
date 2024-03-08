@@ -2,7 +2,7 @@ package com.china.psychy.android.feature.tabs.serials
 
 import com.arkivanov.decompose.ComponentContext
 
-class SerialsComponentImpl(
+class SerialsTabComponentImpl(
     componentContext: ComponentContext
-) : SerialsComponent, ComponentContext by componentContext {
+) : SerialsTabComponent, ComponentContext by componentContext {
 }

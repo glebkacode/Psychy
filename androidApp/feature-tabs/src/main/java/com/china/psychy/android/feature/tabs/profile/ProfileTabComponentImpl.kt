@@ -2,7 +2,7 @@ package com.china.psychy.android.feature.tabs.profile
 
 import com.arkivanov.decompose.ComponentContext
 
-class ProfileComponentImpl(
+class ProfileTabComponentImpl(
     componentContext: ComponentContext
-) : ProfileComponent, ComponentContext by componentContext {
+) : ProfileTabComponent, ComponentContext by componentContext {
 }

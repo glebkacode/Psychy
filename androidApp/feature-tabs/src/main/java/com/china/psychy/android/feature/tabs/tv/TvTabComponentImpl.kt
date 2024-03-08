@@ -2,7 +2,7 @@ package com.china.psychy.android.feature.tabs.tv
 
 import com.arkivanov.decompose.ComponentContext
 
-class TvComponentImpl(
+class TvTabComponentImpl(
     componentContext: ComponentContext
-) : TvComponent, ComponentContext by componentContext {
+) : TvTabComponent, ComponentContext by componentContext {
 }

@@ -10,6 +10,7 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.auth.login.AuthComponent
 import com.china.psychy.android.feature.auth.login.AuthComponentImpl
+import com.china.psychy.android.feature.player.PlayerComponentImpl
 import com.china.psychy.android.feature.tabs.root.TabsRootComponentImpl
 import com.china.psychy.android.root.RootComponent.Child
 import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
@@ -50,7 +51,13 @@ class RootComponentImpl(
                 )
             )
             Config.RootTabs -> Child.TabsRootChild(
-                TabsRootComponentImpl(componentContext = componentContext)
+                TabsRootComponentImpl(
+                    componentContext = componentContext,
+                    openPlayer = { navigation.push(Config.Player) }
+                )
+            )
+            Config.Player -> Child.PlayerChild(
+                PlayerComponentImpl(componentComponent = componentContext)
             )
         }
 
@@ -66,5 +73,7 @@ class RootComponentImpl(
         data object Auth : Config
         @Serializable
         data object RootTabs : Config
+        @Serializable
+        data object Player : Config
     }
 }
