@@ -8,6 +8,7 @@ import com.china.psychy.android.feature.tabs.voddetail.VodDetailComponent
 interface MainTabComponent {
     val childStack: Value<ChildStack<*, Child>>
     fun onItemSelected()
+    fun onPurchaseCompleted()
     sealed class Child {
         class MainList(val component: MainListComponent) : Child()
         class VodDetails(val component: VodDetailComponent) : Child()

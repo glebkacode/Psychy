@@ -3,9 +3,12 @@ package com.china.psychy.android.feature.tabs.main.tab
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
+import com.arkivanov.mvikotlin.core.store.StoreFactory
+import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.tabs.main.list.MainListComponentImpl
 import com.china.psychy.android.feature.tabs.main.tab.MainTabComponent.Child
 import com.china.psychy.android.feature.tabs.voddetail.VodDetailComponentImpl
@@ -13,7 +16,10 @@ import kotlinx.serialization.Serializable
 
 class MainTabComponentImpl(
     componentContext: ComponentContext,
-    private val openPlayer: () -> Unit
+    private val storeFactory: StoreFactory,
+    private val coreDispatcher: CoreDispatcher,
+    private val openPlayer: () -> Unit,
+    private val openPurchase: () -> Unit
 ) : MainTabComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -39,8 +45,11 @@ class MainTabComponentImpl(
             is Config.VodDetails -> Child.VodDetails(
                 VodDetailComponentImpl(
                     componentContext = componentContext,
+                    storeFactory = storeFactory,
+                    mainContext = coreDispatcher.main(),
+                    ioContext = coreDispatcher.io(),
                     openPlayback = { openPlayer() },
-                    openPurchase = {  }
+                    openPurchase = { openPurchase() }
                 )
             )
         }
@@ -48,6 +57,10 @@ class MainTabComponentImpl(
 
     override fun onItemSelected() {
         navigation.push(Config.VodDetails)
+    }
+
+    override fun onPurchaseCompleted() {
+        (stack.active.instance as? Child.VodDetails)?.component?.onPurchaseCompleted()
     }
 
     @Serializable

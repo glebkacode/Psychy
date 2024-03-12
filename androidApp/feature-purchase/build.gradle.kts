@@ -7,8 +7,9 @@ plugins {
 }
 
 android {
-    namespace = "com.china.psychy.android.feature.tabs"
+    namespace = "com.china.psychy.android.feature.purchase"
     compileSdk = 34
+    resourcePrefix("auth")
     buildFeatures {
         compose = true
     }
@@ -27,7 +28,14 @@ android {
 dependencies {
     implementation(projects.shared)
     implementation(project(":androidApp:core"))
-    implementation(project(":shared:feature-lk"))
+    implementation(project(":shared:feature-auth"))
+    implementation(libs.mvikotlin)
+    implementation(libs.mvikotlin.main)
+    implementation(libs.mvikotlin.logging)
+    implementation(libs.mvikotlin.extensions.coroutines)
+    implementation(libs.mvikotlin.timetravel)
+    implementation(libs.decompose)
+    implementation(libs.decompose.jetpack)
     implementation(libs.compose.ui)
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
@@ -37,12 +45,5 @@ dependencies {
     implementation(libs.androidx.fragment.ktx)
     ksp(libs.kotlin.inject.ksp)
     implementation(libs.kotlin.inject.runtime)
-    implementation(libs.mvikotlin)
-    implementation(libs.mvikotlin.main)
-    implementation(libs.mvikotlin.logging)
-    implementation(libs.mvikotlin.extensions.coroutines)
-    implementation(libs.mvikotlin.timetravel)
-    implementation(libs.decompose)
-    implementation(libs.decompose.jetpack)
     debugImplementation(libs.compose.ui.tooling)
 }

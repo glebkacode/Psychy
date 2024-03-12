@@ -3,7 +3,9 @@ package com.china.psychy.android.root
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
@@ -11,6 +13,7 @@ import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.auth.login.AuthComponent
 import com.china.psychy.android.feature.auth.login.AuthComponentImpl
 import com.china.psychy.android.feature.player.PlayerComponentImpl
+import com.china.psychy.android.feature.purchase.root.PurchaseRootComponentImpl
 import com.china.psychy.android.feature.tabs.root.TabsRootComponentImpl
 import com.china.psychy.android.root.RootComponent.Child
 import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
@@ -53,13 +56,28 @@ class RootComponentImpl(
             Config.RootTabs -> Child.TabsRootChild(
                 TabsRootComponentImpl(
                     componentContext = componentContext,
-                    openPlayer = { navigation.push(Config.Player) }
+                    storeFactory = storeFactory,
+                    coreDispatcher = coreDispatcher,
+                    openPlayer = { navigation.push(Config.Player) },
+                    openPurchase = { navigation.push(Config.Purchase) }
+                )
+            )
+            Config.Purchase -> Child.PurchaseChild(
+                PurchaseRootComponentImpl(
+                    componentContext = componentContext,
+                    onPaymentCompleted = { onPurchaseCompleted() }
                 )
             )
             Config.Player -> Child.PlayerChild(
                 PlayerComponentImpl(componentComponent = componentContext)
             )
         }
+
+    private fun onPurchaseCompleted() {
+        navigation.pop {
+            (stack.active.instance as? Child.TabsRootChild)?.component?.onPurchasedCompleted()
+        }
+    }
 
     private fun onAuthOutput(output: AuthComponent.Output) {
         when(output) {
@@ -73,6 +91,8 @@ class RootComponentImpl(
         data object Auth : Config
         @Serializable
         data object RootTabs : Config
+        @Serializable
+        data object Purchase : Config
         @Serializable
         data object Player : Config
     }
