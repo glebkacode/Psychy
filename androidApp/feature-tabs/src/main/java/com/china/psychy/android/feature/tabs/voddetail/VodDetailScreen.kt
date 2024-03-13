@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
-import com.china.psychy.android.feature.tabs.purchase.PurchaseBottomSheet
+import com.china.psychy.android.feature.tabs.purchase.root.PurchaseRootScreen
 import com.china.psychy.android.feature.tabs.voddetail.VodDetailComponent.Model
 
 @Composable
@@ -22,7 +22,7 @@ fun VodDetailScreen(
     modifier: Modifier
 ) {
     val models by component.models.collectAsState(initial = Model())
-    
+
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.Center,
@@ -45,6 +45,6 @@ fun VodDetailScreen(
 
     val dialogSlot by component.dialogSlot.subscribeAsState()
     dialogSlot.child?.instance?.also {
-        PurchaseBottomSheet(component = it)
+        PurchaseRootScreen(component = it, modifier = modifier)
     }
 }

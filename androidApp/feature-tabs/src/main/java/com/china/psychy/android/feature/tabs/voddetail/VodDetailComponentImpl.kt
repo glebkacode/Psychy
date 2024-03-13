@@ -9,8 +9,8 @@ import com.arkivanov.decompose.router.slot.dismiss
 import com.arkivanov.decompose.value.Value
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.states
-import com.china.psychy.android.feature.tabs.purchase.PurchaseComponent
-import com.china.psychy.android.feature.tabs.purchase.PurchaseComponentImpl
+import com.china.psychy.android.feature.tabs.purchase.root.PurchaseRootComponent
+import com.china.psychy.android.feature.tabs.purchase.root.PurchaseRootComponentImpl
 import com.china.psychy.android.feature.tabs.voddetail.VodDetailStore.Intent
 import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.serialization.Serializable
@@ -21,8 +21,7 @@ class VodDetailComponentImpl(
     storeFactory: StoreFactory,
     mainContext: CoroutineContext,
     ioContext: CoroutineContext,
-    private val openPlayback: () -> Unit,
-    private val openPurchase: () -> Unit
+    private val openPlayback: () -> Unit
 ) : VodDetailComponent, ComponentContext by componentContext {
 
     private val vodDetailStore = VodDetailStoreFactory(
@@ -36,12 +35,13 @@ class VodDetailComponentImpl(
     private val dialogNavigation = SlotNavigation<PurchaseConfig>()
 
     private val _dialogSlot =
-        childSlot<PurchaseConfig, PurchaseComponent>(
+        childSlot<PurchaseConfig, PurchaseRootComponent>(
             source = dialogNavigation,
             serializer = null,
             handleBackButton = true,
-            childFactory = { config, _ ->
-                PurchaseComponentImpl(
+            childFactory = { config, componentContext ->
+                PurchaseRootComponentImpl(
+                    componentContext = componentContext,
                     title = config.title,
                     description = config.description,
                     onDismissed = dialogNavigation::dismiss,
@@ -49,7 +49,7 @@ class VodDetailComponentImpl(
             }
         )
 
-    override val dialogSlot: Value<ChildSlot<*, PurchaseComponent>> = _dialogSlot
+    override val dialogSlot: Value<ChildSlot<*, PurchaseRootComponent>> = _dialogSlot
 
     override fun onPlayButtonClicked() {
         openPlayback()

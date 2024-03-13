@@ -18,8 +18,7 @@ class MainTabComponentImpl(
     componentContext: ComponentContext,
     private val storeFactory: StoreFactory,
     private val coreDispatcher: CoreDispatcher,
-    private val openPlayer: () -> Unit,
-    private val openPurchase: () -> Unit
+    private val openPlayer: () -> Unit
 ) : MainTabComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -48,8 +47,7 @@ class MainTabComponentImpl(
                     storeFactory = storeFactory,
                     mainContext = coreDispatcher.main(),
                     ioContext = coreDispatcher.io(),
-                    openPlayback = { openPlayer() },
-                    openPurchase = { openPurchase() }
+                    openPlayback = { openPlayer() }
                 )
             )
         }

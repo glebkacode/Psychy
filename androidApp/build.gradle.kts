@@ -46,7 +46,6 @@ dependencies {
     implementation(project(":androidApp:feature-auth"))
     implementation(project(":androidApp:feature-tabs"))
     implementation(project(":androidApp:feature-player"))
-    implementation(project(":androidApp:feature-purchase"))
     implementation(project(":shared:feature-auth"))
     implementation(project(":shared:feature-lk"))
     implementation(libs.decompose)

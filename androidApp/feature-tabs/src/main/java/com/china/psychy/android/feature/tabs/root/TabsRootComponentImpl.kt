@@ -22,8 +22,7 @@ class TabsRootComponentImpl(
     componentContext: ComponentContext,
     private val storeFactory: StoreFactory,
     private val coreDispatcher: CoreDispatcher,
-    private val openPlayer: () -> Unit,
-    private val openPurchase: () -> Unit
+    private val openPlayer: () -> Unit
 ) : ComponentContext by componentContext, TabsRootComponent {
 
     private val navigation = StackNavigation<Config>()
@@ -68,8 +67,7 @@ class TabsRootComponentImpl(
                     componentContext = componentContext,
                     storeFactory = storeFactory,
                     coreDispatcher = coreDispatcher,
-                    openPlayer = { openPlayer() },
-                    openPurchase = { openPurchase() }
+                    openPlayer = { openPlayer() }
                 )
             )
             is Config.Tv -> Child.TvChild(TvTabComponentImpl(componentContext = componentContext))
