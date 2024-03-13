@@ -12,6 +12,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
+import com.china.psychy.android.feature.tabs.purchase.PurchaseBottomSheet
 import com.china.psychy.android.feature.tabs.voddetail.VodDetailComponent.Model
 
 @Composable
@@ -30,12 +32,19 @@ fun VodDetailScreen(
             Text("VodDetail Screen")
         }
         Spacer(modifier = Modifier.height(24.dp))
+
         Button(onClick = { component.onBuyVodClicked() }) {
             Text(text = "Buy the film")
         }
+
         if (models.isPurchasedCompleted) {
             Spacer(modifier = Modifier.height(24.dp))
             Text(text = "Purchase feature return result")
         }
+    }
+
+    val dialogSlot by component.dialogSlot.subscribeAsState()
+    dialogSlot.child?.instance?.also {
+        PurchaseBottomSheet(component = it)
     }
 }
