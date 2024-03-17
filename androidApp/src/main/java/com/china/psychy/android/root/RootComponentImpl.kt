@@ -12,8 +12,9 @@ import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.china.psychy.android.core.dispatchers.CoreDispatcher
 import com.china.psychy.android.feature.auth.login.AuthComponent
 import com.china.psychy.android.feature.auth.login.AuthComponentImpl
-import com.china.psychy.android.feature.player.PlayerComponentImpl
-import com.china.psychy.android.feature.tabs.purchase.root.PurchaseRootComponentImpl
+import com.china.psychy.android.feature.player.playback.ExoPlayerWrapper
+import com.china.psychy.android.feature.player.playback.Player
+import com.china.psychy.android.feature.player.root.RootPlayerComponentImpl
 import com.china.psychy.android.feature.tabs.root.TabsRootComponentImpl
 import com.china.psychy.android.root.RootComponent.Child
 import com.china.psychy.feature.auth.domain.forgotpassword.ForgotPasswordUseCase
@@ -28,6 +29,7 @@ class RootComponentImpl(
     private val registerUserUseCase: RegisterUserUseCase,
     private val forgotPasswordUseCase: ForgotPasswordUseCase,
     private val coreDispatcher: CoreDispatcher,
+    private val player: ExoPlayerWrapper
 ) : RootComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -35,7 +37,7 @@ class RootComponentImpl(
     private val stack = childStack(
         source = navigation,
         serializer = Config.serializer(),
-        initialConfiguration = Config.RootTabs,
+        initialConfiguration = Config.Player,
         childFactory = ::child
     )
     override val childStack: Value<ChildStack<*, Child>> = stack
@@ -62,7 +64,13 @@ class RootComponentImpl(
                 )
             )
             Config.Player -> Child.PlayerChild(
-                PlayerComponentImpl(componentComponent = componentContext)
+                RootPlayerComponentImpl(
+                    componentContext = componentContext,
+                    storeFactory = storeFactory,
+                    player = player,
+                    mainContext = coreDispatcher.main(),
+                    ioContext = coreDispatcher.io()
+                )
             )
         }
 

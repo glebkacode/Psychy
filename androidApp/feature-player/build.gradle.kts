@@ -9,7 +9,6 @@ plugins {
 android {
     namespace = "com.china.psychy.android.feature.player"
     compileSdk = 34
-    resourcePrefix("auth")
     buildFeatures {
         compose = true
     }
@@ -40,6 +39,9 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material3)
     implementation(libs.compose.navigation)
+    implementation(libs.media3.exoplayer)
+    implementation(libs.media3.exoplayer.dash)
+    implementation(libs.media3.exoplayer.ui)
     implementation(libs.androidx.activity.compose)
     implementation(libs.kotlin.coroutines.android)
     implementation(libs.androidx.fragment.ktx)
