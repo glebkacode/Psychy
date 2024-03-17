@@ -28,7 +28,8 @@ internal val addStateToModel: (State) -> Model =
             progressPosition = positionSec.toFloat(),
             bufferPosition = buffPosSec.toFloat(),
             isControlsVisible = state.isControlsVisible,
-            isPlay = state.isPlay
+            isPlay = state.isPlay,
+            isSidePanelOpened = state.isSettingsSelected
         )
     }
 

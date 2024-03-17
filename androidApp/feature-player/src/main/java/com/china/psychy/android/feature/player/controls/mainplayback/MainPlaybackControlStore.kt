@@ -11,6 +11,7 @@ interface MainPlaybackControlStore : Store<Intent, State, Label> {
         data object Play : Intent()
         data object Pause : Intent()
         data object OutsideSelected : Intent()
+        data object SettingsSelected : Intent()
         data class PlaybackPositionChanged(
             val position: Long,
             val duration: Long,
@@ -32,6 +33,7 @@ interface MainPlaybackControlStore : Store<Intent, State, Label> {
         val bufferPosition: Long = 0,
         val duration: Long = 0,
         val isControlsVisible: Boolean = true,
-        val isPlay: Boolean = false
+        val isPlay: Boolean = false,
+        val isSettingsSelected: Boolean = false
     ) : JvmSerializable
 }

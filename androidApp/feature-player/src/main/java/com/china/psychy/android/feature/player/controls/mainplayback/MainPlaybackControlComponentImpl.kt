@@ -18,6 +18,9 @@ class MainPlaybackControlComponentImpl(
     private val output: (MainPlaybackControlComponent.Output) -> Unit
 ) : MainPlaybackControlComponent, ComponentContext by componentContext {
 
+    /*
+    * ToDo Store кажется много на себя берет, стоит разделить на отдельные store
+    * */
     private val mainPlaybackControlStore = MainPlaybackControlStoreFactory(
         storeFactory,
         mainContext,
@@ -42,6 +45,10 @@ class MainPlaybackControlComponentImpl(
 
     override fun onOutsideClicked() {
         mainPlaybackControlStore.accept(Intent.OutsideSelected)
+    }
+
+    override fun onSettingsClicked() {
+        mainPlaybackControlStore.accept(Intent.SettingsSelected)
     }
 
     override fun seekTo(progress: Float) {

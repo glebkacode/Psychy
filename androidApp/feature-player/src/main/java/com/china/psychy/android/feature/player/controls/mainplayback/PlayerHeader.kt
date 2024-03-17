@@ -1,5 +1,6 @@
 package com.china.psychy.android.feature.player.controls.mainplayback
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -21,7 +22,8 @@ import com.china.psychy.android.feature.player.R
 @Composable
 fun PlayerHeader(
     title: String,
-    modifier: Modifier
+    modifier: Modifier,
+    onSettingsClicked: () -> Unit
 ) {
     Row(modifier = modifier.fillMaxWidth()) {
         IconButton(
@@ -43,7 +45,8 @@ fun PlayerHeader(
         Spacer(modifier = Modifier.weight(1f))
         Icon(
             painter = painterResource(id = R.drawable.ic_settings),
-            contentDescription = "Icon settings"
+            contentDescription = "Icon settings",
+            modifier = Modifier.clickable { onSettingsClicked() }
         )
     }
 }
@@ -54,7 +57,8 @@ fun PlayerHeaderPreview() {
     MaterialTheme {
         PlayerHeader(
             title = "Джентельмены",
-            modifier = Modifier
+            modifier = Modifier,
+            onSettingsClicked = {}
         )
     }
 }
