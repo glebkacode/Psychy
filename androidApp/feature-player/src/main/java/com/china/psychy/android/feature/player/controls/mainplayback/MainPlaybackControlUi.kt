@@ -24,9 +24,7 @@ fun MainPlaybackControlUi(component: MainPlaybackControlComponent) {
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
-                onClick = {
-                    component.onOutsideClicked()
-                }
+                onClick = { component.onOutsideClicked() }
             ),
         contentAlignment = Alignment.Center
     ) {
