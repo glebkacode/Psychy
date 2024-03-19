@@ -4,16 +4,16 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlComponent
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlComponentImpl
-import com.china.psychy.android.feature.player.controls.root.ControlsComponent.Output
+import com.china.psychy.android.feature.player.controls.root.RootControlsComponent.Output
 import kotlin.coroutines.CoroutineContext
 
-class ControlsComponentImpl(
+class RootControlsComponentImpl(
     componentContext: ComponentContext,
     storeFactory: StoreFactory,
     mainContext: CoroutineContext,
     ioContext: CoroutineContext,
     private val output: (Output) -> Unit
-) : ControlsComponent {
+) : RootControlsComponent {
 
     override val mainPlaybackControlComponent = MainPlaybackControlComponentImpl(
         componentContext = componentContext,

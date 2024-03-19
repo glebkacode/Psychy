@@ -7,6 +7,8 @@ import com.arkivanov.mvikotlin.extensions.coroutines.bind
 import com.arkivanov.mvikotlin.extensions.coroutines.labels
 import com.arkivanov.mvikotlin.extensions.coroutines.states
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlStore.*
+import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.root.RootSideMenuComponent
+import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.root.RootSideMenuComponentImpl
 import kotlinx.coroutines.flow.mapNotNull
 import kotlin.coroutines.CoroutineContext
 
@@ -28,6 +30,7 @@ class MainPlaybackControlComponentImpl(
     ).create()
     override val models =
         mainPlaybackControlStore.states.mapNotNull { state -> addStateToModel.invoke(state) }
+    override val sideMenuComponent: RootSideMenuComponent = RootSideMenuComponentImpl(componentContext)
 
     init {
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY, mainContext) {

@@ -115,7 +115,8 @@ class MainPlaybackControlStoreFactory(
                     isControlsVisible = false
                 )
                 Msg.ShowControls -> copy(
-                    isControlsVisible = true
+                    isControlsVisible = true,
+                    isSettingsSelected = false
                 )
                 Msg.Play -> copy(
                     isPlay = true

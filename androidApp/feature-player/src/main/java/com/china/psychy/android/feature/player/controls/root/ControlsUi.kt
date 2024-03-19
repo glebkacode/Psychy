@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlUi
 
 @Composable
-fun ControlsUi(component: ControlsComponent) {
+fun ControlsUi(component: RootControlsComponent) {
     Box(
         modifier = Modifier.fillMaxSize()
             .padding(16.dp)

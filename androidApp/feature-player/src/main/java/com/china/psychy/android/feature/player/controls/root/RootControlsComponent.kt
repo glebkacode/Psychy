@@ -2,7 +2,7 @@ package com.china.psychy.android.feature.player.controls.root
 
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlComponent
 
-interface ControlsComponent {
+interface RootControlsComponent {
     val mainPlaybackControlComponent: MainPlaybackControlComponent
     fun changePosition(position: Long, duration: Long, bufferPosition: Long)
     sealed class Output {

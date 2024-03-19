@@ -1,6 +1,7 @@
 package com.china.psychy.android.feature.player.controls.mainplayback
 
 import com.china.psychy.android.feature.player.controls.mainplayback.MainPlaybackControlComponent.Model
+import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.root.RootSideMenuComponent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
@@ -13,6 +14,8 @@ class MainPlaybackControlComponentPreview : MainPlaybackControlComponent {
             bufferPosition = 1000f
         )
     )
+    override val sideMenuComponent: RootSideMenuComponent
+        get() = TODO("Not yet implemented")
 
     override fun onPlayClicked() {}
 

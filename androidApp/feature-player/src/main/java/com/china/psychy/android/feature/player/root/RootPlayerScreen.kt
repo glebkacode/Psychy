@@ -16,6 +16,6 @@ fun RootPlayerScreen(
         modifier = Modifier.fillMaxSize()
     ) {
         PlaybackUi(component = component.playbackComponent)
-        ControlsUi(component = component.controlsComponent)
+        ControlsUi(component = component.rootControlsComponent)
     }
 }

@@ -1,4 +1,4 @@
-package com.china.psychy.android.feature.player.controls.mainplayback
+package com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.menulist
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.clickable
@@ -20,16 +20,19 @@ import androidx.compose.ui.unit.sp
 import com.china.psychy.android.feature.player.R
 
 @Composable
-fun SidePanel(modifier: Modifier) {
+fun MenuListUi(
+    component: SideMenuListComponent,
+    modifier: Modifier
+) {
     Column(modifier) {
         PrimarySettings()
         SecondarySettingsItem(
             title = "Качество видео",
-            onClick = {  }
+            onClick = { component.onVideoQualityClicked() }
         )
         SecondarySettingsItem(
             title = "Аудио и субтитры",
-            onClick = {  }
+            onClick = { component.onAudioSubtitleClicked() }
         )
     }
 }

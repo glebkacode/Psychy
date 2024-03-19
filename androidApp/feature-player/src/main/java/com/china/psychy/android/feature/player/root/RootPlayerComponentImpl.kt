@@ -2,8 +2,8 @@ package com.china.psychy.android.feature.player.root
 
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.mvikotlin.core.store.StoreFactory
-import com.china.psychy.android.feature.player.controls.root.ControlsComponent
-import com.china.psychy.android.feature.player.controls.root.ControlsComponentImpl
+import com.china.psychy.android.feature.player.controls.root.RootControlsComponent
+import com.china.psychy.android.feature.player.controls.root.RootControlsComponentImpl
 import com.china.psychy.android.feature.player.playback.ExoPlayerWrapper
 import com.china.psychy.android.feature.player.playback.PlaybackComponent
 import com.china.psychy.android.feature.player.playback.PlaybackComponentImpl
@@ -28,7 +28,7 @@ class RootPlayerComponentImpl(
 
     private fun onPlaybackOutput(event: PlaybackComponent.Ouput) {
         when (event) {
-            is PlaybackComponent.Ouput.PositionChanged -> controlsComponent.changePosition(
+            is PlaybackComponent.Ouput.PositionChanged -> rootControlsComponent.changePosition(
                 position = event.position,
                 duration = event.duration,
                 bufferPosition = event.bufferPosition
@@ -36,7 +36,7 @@ class RootPlayerComponentImpl(
         }
     }
 
-    override val controlsComponent: ControlsComponent = ControlsComponentImpl(
+    override val rootControlsComponent: RootControlsComponent = RootControlsComponentImpl(
         componentContext = componentContext,
         storeFactory = storeFactory,
         mainContext = mainContext,
@@ -44,17 +44,17 @@ class RootPlayerComponentImpl(
         output = ::onControlOutput
     )
 
-    private fun onControlOutput(output: ControlsComponent.Output) {
+    private fun onControlOutput(output: RootControlsComponent.Output) {
         when (output) {
-            is ControlsComponent.Output.SeekToPosition -> {
+            is RootControlsComponent.Output.SeekToPosition -> {
                 playbackComponent.playbackSeekTo(output.position)
             }
 
-            ControlsComponent.Output.StartPlay -> {
+            RootControlsComponent.Output.StartPlay -> {
                 playbackComponent.playbackStart()
             }
 
-            ControlsComponent.Output.StopPlay -> {
+            RootControlsComponent.Output.StopPlay -> {
                 playbackComponent.playbackStop()
             }
         }

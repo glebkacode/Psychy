@@ -1,9 +1,11 @@
 package com.china.psychy.android.feature.player.controls.mainplayback
 
+import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.root.RootSideMenuComponent
 import kotlinx.coroutines.flow.Flow
 
 interface MainPlaybackControlComponent {
     val models: Flow<Model>
+    val sideMenuComponent: RootSideMenuComponent
     fun onPlayClicked()
     fun onPauseClicked()
     fun onOutsideClicked()

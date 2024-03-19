@@ -15,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.root.SideMenuUi
 
 @Composable
 fun MainPlaybackControlUi(component: MainPlaybackControlComponent) {
@@ -44,7 +45,8 @@ fun MainPlaybackControlUi(component: MainPlaybackControlComponent) {
                 onPauseClicked = { component.onPauseClicked() }
             )
             if (models.isSidePanelOpened) {
-                SidePanel(
+                SideMenuUi(
+                    component = component.sideMenuComponent,
                     modifier = Modifier
                         .align(Alignment.TopEnd)
                         .width(328.dp)
