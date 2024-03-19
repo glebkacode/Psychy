@@ -33,6 +33,7 @@ class MainPlaybackControlStoreFactory(
         data object Play : Msg
         data object Pause : Msg
         data object SettingsSelected : Msg
+        data object SettingsClosed : Msg
     }
 
     fun create(): MainPlaybackControlStore =
@@ -58,6 +59,7 @@ class MainPlaybackControlStoreFactory(
                 Intent.Pause -> onPause()
                 Intent.OutsideSelected -> onOutsideSelected()
                 Intent.SettingsSelected -> onSettingsSelected()
+                Intent.SettingsClosed -> onSettingsClosed()
             }
         }
 
@@ -99,6 +101,10 @@ class MainPlaybackControlStoreFactory(
         private fun onSettingsSelected() {
             dispatch(Msg.SettingsSelected)
         }
+
+        private fun onSettingsClosed() {
+            dispatch(Msg.SettingsClosed)
+        }
     }
 
     object ReducerImpl : Reducer<State, Msg> {
@@ -126,6 +132,9 @@ class MainPlaybackControlStoreFactory(
                 )
                 Msg.SettingsSelected -> copy(
                     isSettingsSelected = true
+                )
+                Msg.SettingsClosed -> copy(
+                    isSettingsSelected = false
                 )
             }
         }

@@ -10,6 +10,7 @@ interface MainPlaybackControlComponent {
     fun onPauseClicked()
     fun onOutsideClicked()
     fun onSettingsClicked()
+    fun onSettingsClosed()
     fun seekTo(progress: Float)
     fun playbackChanged(
         position: Long,

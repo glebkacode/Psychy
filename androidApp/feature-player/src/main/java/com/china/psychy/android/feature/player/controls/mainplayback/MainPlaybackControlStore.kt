@@ -12,6 +12,7 @@ interface MainPlaybackControlStore : Store<Intent, State, Label> {
         data object Pause : Intent()
         data object OutsideSelected : Intent()
         data object SettingsSelected : Intent()
+        data object SettingsClosed : Intent()
         data class PlaybackPositionChanged(
             val position: Long,
             val duration: Long,

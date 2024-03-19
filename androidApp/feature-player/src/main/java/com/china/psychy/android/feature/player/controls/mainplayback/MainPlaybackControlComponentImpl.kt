@@ -30,7 +30,10 @@ class MainPlaybackControlComponentImpl(
     ).create()
     override val models =
         mainPlaybackControlStore.states.mapNotNull { state -> addStateToModel.invoke(state) }
-    override val sideMenuComponent: RootSideMenuComponent = RootSideMenuComponentImpl(componentContext)
+    override val sideMenuComponent: RootSideMenuComponent = RootSideMenuComponentImpl(
+        componentContext = componentContext,
+        closeSideMenu = { onSettingsClosed() }
+    )
 
     init {
         bind(lifecycle, BinderLifecycleMode.CREATE_DESTROY, mainContext) {
@@ -52,6 +55,10 @@ class MainPlaybackControlComponentImpl(
 
     override fun onSettingsClicked() {
         mainPlaybackControlStore.accept(Intent.SettingsSelected)
+    }
+
+    override fun onSettingsClosed() {
+        mainPlaybackControlStore.accept(Intent.SettingsClosed)
     }
 
     override fun seekTo(progress: Float) {

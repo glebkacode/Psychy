@@ -4,6 +4,8 @@ import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
 import com.arkivanov.decompose.router.stack.childStack
+import com.arkivanov.decompose.router.stack.pop
+import com.arkivanov.decompose.router.stack.popTo
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.audiosubtitle.AudioSubtitleSettingsComponentImpl
@@ -13,7 +15,8 @@ import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.vi
 import kotlinx.serialization.Serializable
 
 class RootSideMenuComponentImpl(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    val closeSideMenu: () -> Unit
 ) : RootSideMenuComponent, ComponentContext by componentContext {
 
     private val navigation = StackNavigation<Config>()
@@ -25,6 +28,10 @@ class RootSideMenuComponentImpl(
         childFactory = ::child
     )
     override val childStack: Value<ChildStack<*, Child>> = stack
+    override fun onOutsideClicked() {
+        closeSideMenu()
+        navigation.popTo(0)
+    }
 
     private fun child(config: Config, componentContext: ComponentContext): Child =
         when (config) {
@@ -36,10 +43,16 @@ class RootSideMenuComponentImpl(
                 )
             )
             Config.AudioSubtitleSettings -> Child.AudioSubtitleSettings(
-                AudioSubtitleSettingsComponentImpl(componentContext)
+                AudioSubtitleSettingsComponentImpl(
+                    componentContext = componentContext,
+                    closeScreen = { navigation.pop() }
+                )
             )
             Config.VideoQualitySettings -> Child.VideoQualitySettings(
-                VideoQualityComponentImpl(componentContext)
+                VideoQualityComponentImpl(
+                    componentContext = componentContext,
+                    closeScreen = { navigation.pop() }
+                )
             )
         }
 

@@ -22,6 +22,9 @@ class MainPlaybackControlComponentPreview : MainPlaybackControlComponent {
     override fun onPauseClicked() {}
     override fun onOutsideClicked() {}
     override fun onSettingsClicked() {}
+    override fun onSettingsClosed() {
+        TODO("Not yet implemented")
+    }
 
     override fun seekTo(progress: Float) {}
 

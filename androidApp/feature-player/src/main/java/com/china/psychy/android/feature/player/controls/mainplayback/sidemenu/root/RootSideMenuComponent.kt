@@ -8,6 +8,7 @@ import com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.vi
 
 interface RootSideMenuComponent {
     val childStack: Value<ChildStack<*, Child>>
+    fun onOutsideClicked()
     sealed class Child {
         data class MenuList(val component: SideMenuListComponent) : Child()
         data class VideoQualitySettings(val component: VideoQualityComponent) : Child()

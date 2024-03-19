@@ -3,7 +3,10 @@ package com.china.psychy.android.feature.player.controls.mainplayback.sidemenu.a
 import com.arkivanov.decompose.ComponentContext
 
 class AudioSubtitleSettingsComponentImpl(
-    componentContext: ComponentContext
+    componentContext: ComponentContext,
+    val closeScreen: () -> Unit
 ) : AudioSubtitleSettingsComponent, ComponentContext by componentContext {
-
+    override fun onAudioTrackSelected(trackType: AudioTrackType) {
+        closeScreen()
+    }
 }
